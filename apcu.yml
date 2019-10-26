@@ -1,0 +1,4 @@
+---
+ext_name: apcu
+ext_conf: |
+  extension=apcu.so

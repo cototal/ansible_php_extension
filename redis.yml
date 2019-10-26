@@ -1,0 +1,4 @@
+---
+ext_name: redis
+ext_conf: |
+  extension=redis.so

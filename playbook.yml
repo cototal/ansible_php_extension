@@ -1,0 +1,33 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+    - apcu.yml
+    - vars.yml
+    - vault.yml
+  tasks:
+    - name: Ensure PHP dev packages are installed
+      become: true
+      apt:
+        name:
+          - php-pear
+          - php-dev
+        state: latest
+    - name: Install the extension
+      become: true
+      pear:
+        name: "pecl/{{ ext_name }}"
+        state: present
+    - name: Prepare config file
+      become: true
+      copy:
+        dest: "/etc/php/{{ php_version }}/mods-available/{{ ext_name }}.ini"
+        content: "{{ ext_conf }}"
+    - name: Enable extension
+      become: true
+      file:
+        state: link
+        src: "/etc/php/{{ php_version }}/mods-available/{{ ext_name }}.ini"
+        dest: "/etc/php/{{ php_version }}/{{ item }}/conf.d/{{ ext_name }}.ini"
+      with_items:
+        - cli

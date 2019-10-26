@@ -1,0 +1,4 @@
+---
+ext_name: oauth
+ext_conf: |
+  extension=oauth.so

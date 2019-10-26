@@ -1,0 +1,4 @@
+---
+ext_name: igbinary
+ext_conf: |
+  extension=igbinary.so

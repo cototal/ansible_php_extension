@@ -1,0 +1,2 @@
+php_version: "7.3"
+ansible_become_pass: "{{ vault_ansible_become_pass }}"
